@@ -17,6 +17,10 @@
       routerLink="/owners/{{ currentOwner.id }}">
       Edit
     </a>
+    <a class="badge badge-info"
+       routerLink="/owners/{{ currentOwner.id }}/pets">
+      Pets
+    </a>
   </div>
 
   <div *ngIf="!currentOwner">

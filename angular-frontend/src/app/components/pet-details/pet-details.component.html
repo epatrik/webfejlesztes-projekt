@@ -1,0 +1,73 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentPet.id">
+    <h4>Pet</h4>
+    <div>
+      <label><strong>Name:</strong></label> {{ currentPet.name }}
+    </div>
+    <div>
+      <label><strong>Species:</strong></label>
+      {{ currentPet.species }}
+    </div>
+
+    <a class="badge badge-warning"
+       routerLink="/pets/{{ currentPet.id }}">
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentPet">
+    <br />
+    <p>Please click on an Pet...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentPet.id" class="edit-form">
+    <h4>Pet</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="currentPet.name"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="species">Species</label>
+        <input
+          type="text"
+          class="form-control"
+          id="species"
+          [(ngModel)]="currentPet.species"
+          name="species"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deletePet()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updatePet()"
+    >
+      Update
+    </button>
+    <a class="badge badge-warning my-2"
+       routerLink="/owners/{{ currentOwnerId }}/pets">
+      Back
+    </a>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentPet.id">
+    <br />
+    <p>Cannot access this Pet...</p>
+  </div>
+</ng-template>
+

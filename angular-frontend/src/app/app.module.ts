@@ -9,6 +9,7 @@ import { AddOwnerComponent } from './components/add-owner/add-owner.component';
 import { OwnerDetailsComponent } from './components/owner-details/owner-details.component';
 import { OwnersListComponent } from './components/owners-list/owners-list.component';
 import { PetsListComponent } from './components/pets-list/pets-list.component';
+import { PetDetailsComponent } from './components/pet-details/pet-details.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PetsListComponent } from './components/pets-list/pets-list.component';
     AddOwnerComponent,
     OwnerDetailsComponent,
     OwnersListComponent,
-    PetsListComponent
+    PetsListComponent,
+    PetDetailsComponent
   ],
   imports: [
     BrowserModule,

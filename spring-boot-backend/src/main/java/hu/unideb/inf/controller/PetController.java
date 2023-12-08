@@ -46,6 +46,17 @@ public class PetController {
         }
     }
 
+    @GetMapping("pets/{id}/ownerId")
+    public ResponseEntity<Long> getOwnerIdById(@PathVariable("id") long id) {
+        Optional<Pet> petData = petRepository.findById(id);
+
+        if (petData.isPresent()) {
+            return new ResponseEntity<>(petData.get().getOwner().getId(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/owners/{ownerId}/pets")
     public ResponseEntity<Pet> createPet(@PathVariable("ownerId") long ownerId, @RequestBody Pet pet) {
         Optional<Owner> ownerData = ownerRepository.findById(ownerId);
