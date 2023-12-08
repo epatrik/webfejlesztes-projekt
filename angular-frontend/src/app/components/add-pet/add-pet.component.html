@@ -26,11 +26,13 @@
       </div>
 
       <button (click)="savePet()" class="btn btn-success">Submit</button>
+      <button routerLink="/owners/{{ ownerId }}/pets" class="btn btn-info">Back</button>
     </div>
 
     <div *ngIf="submitted">
       <h4>Pet was submitted successfully!</h4>
       <button class="btn btn-success" (click)="newPet()">Add</button>
+      <button routerLink="/owners/{{ ownerId }}/pets" class="btn btn-info">Back</button>
     </div>
   </div>
 </div>

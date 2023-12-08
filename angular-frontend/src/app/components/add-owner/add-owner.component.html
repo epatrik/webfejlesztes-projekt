@@ -37,11 +37,13 @@
       </div>
 
       <button (click)="saveOwner()" class="btn btn-success">Submit</button>
+      <button routerLink="/owners" class="btn btn-info">Back</button>
     </div>
 
     <div *ngIf="submitted">
       <h4>Owner was submitted successfully!</h4>
       <button class="btn btn-success" (click)="newOwner()">Add</button>
+      <button routerLink="/owners" class="btn btn-info">Back</button>
     </div>
   </div>
 </div>
