@@ -37,7 +37,7 @@ export class PetService {
     return this.http.delete(`${baseOwnerUrl}/${ownerId}/pets`);
   }
 
-  getOwnerIdById(id: any): Observable<number> {
-    return this.http.get<number>(`${basePetUrl}/${id}/ownerId`)
+  getOwnerIdById(id: any): Observable<string> {
+    return this.http.get<string>(`${basePetUrl}/${id}/ownerId`)
   }
 }

@@ -12,7 +12,6 @@ import {OwnerService} from "../../services/owner.service";
 export class PetsListComponent {
   pets?: Pet[];
   currentPet: Pet = {};
-  currentOwnerId: number | undefined;
   currentIndex = -1;
   name = '';
 
@@ -22,7 +21,6 @@ export class PetsListComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getOwnerId(this.currentPet.id)
     this.retrievePetsOfOwner(this.route.snapshot.params['ownerId'])
   }
 
@@ -30,16 +28,6 @@ export class PetsListComponent {
     this.petService.getAllOfOwner(ownerId).subscribe({
       next: (data) => {
         this.pets = data;
-        console.log(data);
-      },
-      error: (e) => console.error(e)
-    });
-  }
-
-  getOwnerId(id: string): void {
-    this.petService.getOwnerIdById(id).subscribe({
-      next: (data) => {
-        this.currentOwnerId = data;
         console.log(data);
       },
       error: (e) => console.error(e)

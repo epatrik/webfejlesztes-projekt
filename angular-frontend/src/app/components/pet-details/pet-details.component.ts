@@ -2,6 +2,8 @@ import {Component, Input} from '@angular/core';
 import {PetService} from "../../services/pet.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Pet} from "../../models/pet.model";
+import {OwnerService} from "../../services/owner.service";
+import {Owner} from "../../models/owner.model";
 
 @Component({
   selector: 'app-pet-details',
@@ -16,11 +18,18 @@ export class PetDetailsComponent {
     species: ''
   };
 
+  @Input() currentOwner: Owner = {
+    name: '',
+    email: '',
+    phoneNumber: ''
+  };
+
   message = '';
-  currentOwnerId: number | undefined;
+  currentOwnerId: string | undefined;
 
   constructor(
     private petService: PetService,
+    private ownerService: OwnerService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -29,6 +38,7 @@ export class PetDetailsComponent {
     if (!this.viewMode) {
       this.message = '';
       this.getOwnerId(this.route.snapshot.params['id'])
+      this.getOwner(this.currentOwnerId)
       this.getPet(this.route.snapshot.params['id']);
     }
   }
@@ -43,7 +53,17 @@ export class PetDetailsComponent {
     });
   }
 
-  getOwnerId(id: string): number {
+  getOwner(ownerId: string | undefined): void {
+    this.ownerService.get(ownerId).subscribe({
+      next: (data) => {
+        this.currentOwner = data;
+        console.log(data);
+      },
+      error: (e) => console.error(e)
+    });
+  }
+
+  getOwnerId(id: string): string {
     this.petService.getOwnerIdById(id).subscribe({
       next: (data) => {
         this.currentOwnerId = data;
@@ -51,7 +71,7 @@ export class PetDetailsComponent {
       },
       error: (e) => console.error(e)
     });
-    return <number>this.currentOwnerId;
+    return <string>this.currentOwnerId;
   }
 
   updatePet(): void {
@@ -74,7 +94,7 @@ export class PetDetailsComponent {
     this.petService.delete(this.currentPet.id).subscribe({
       next: (res) => {
         console.log(res);
-        this.router.navigate([`/owners/${this.getOwnerId(this.currentPet.id)}/pets`]);
+        this.router.navigate([`/owners/${this.currentOwnerId}/pets`]);
       },
       error: (e) => console.error(e)
     });
