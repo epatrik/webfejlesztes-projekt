@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pet } from '../models/pet.model';
+import {Owner} from "../models/owner.model";
 
 const basePetUrl = 'http://localhost:9090/api/pets';
 const baseOwnerUrl = 'http://localhost:9090/api/owners'
@@ -34,5 +35,9 @@ export class PetService {
 
   deleteAllOfOwner(ownerId: any): Observable<any> {
     return this.http.delete(`${baseOwnerUrl}/${ownerId}/pets`);
+  }
+
+  findByName(name: any): Observable<Pet[]> {
+    return this.http.get<Pet[]>(`${basePetUrl}?name=${name}`);
   }
 }

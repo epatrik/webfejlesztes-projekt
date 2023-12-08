@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { AddOwnerComponent } from './components/add-owner/add-owner.component';
 import { OwnerDetailsComponent } from './components/owner-details/owner-details.component';
 import { OwnersListComponent } from './components/owners-list/owners-list.component';
+import { PetsListComponent } from './components/pets-list/pets-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddOwnerComponent,
     OwnerDetailsComponent,
-    OwnersListComponent
+    OwnersListComponent,
+    PetsListComponent
   ],
   imports: [
     BrowserModule,
