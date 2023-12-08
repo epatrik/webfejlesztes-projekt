@@ -10,6 +10,7 @@ import { OwnerDetailsComponent } from './components/owner-details/owner-details.
 import { OwnersListComponent } from './components/owners-list/owners-list.component';
 import { PetsListComponent } from './components/pets-list/pets-list.component';
 import { PetDetailsComponent } from './components/pet-details/pet-details.component';
+import { AddPetComponent } from './components/add-pet/add-pet.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PetDetailsComponent } from './components/pet-details/pet-details.compon
     OwnerDetailsComponent,
     OwnersListComponent,
     PetsListComponent,
-    PetDetailsComponent
+    PetDetailsComponent,
+    AddPetComponent
   ],
   imports: [
     BrowserModule,

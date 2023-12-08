@@ -1,0 +1,36 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          required
+          [(ngModel)]="pet.name"
+          name="name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="species">Species</label>
+        <input
+          class="form-control"
+          id="species"
+          required
+          [(ngModel)]="pet.species"
+          name="species"
+        />
+      </div>
+
+      <button (click)="savePet()" class="btn btn-success">Submit</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Pet was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newPet()">Add</button>
+    </div>
+  </div>
+</div>
+
