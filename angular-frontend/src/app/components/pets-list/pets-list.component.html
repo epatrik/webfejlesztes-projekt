@@ -15,7 +15,8 @@
     <button class="m-3 btn btn-sm btn-danger" (click)="removeAllPetsOfOwner()">
       Remove All
     </button>
-    <button class="m-3 btn btn-sm btn-success" routerLink="/addPet/{{currentOwnerId}}">Add</button>
+    <button class="m-3 btn btn-sm btn-success" routerLink="/addPet/{{currentOwnerId}}">Add Pet</button>
+    <button class="m-3 btn btn-sm btn-info" routerLink="/owners">Back</button>
   </div>
   <div class="col-md-6">
     <app-pet-details
