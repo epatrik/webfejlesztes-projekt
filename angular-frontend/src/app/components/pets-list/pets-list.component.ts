@@ -13,6 +13,7 @@ export class PetsListComponent {
   pets?: Pet[];
   currentPet: Pet = {};
   currentIndex = -1;
+  currentOwnerId = this.route.snapshot.params['ownerId'];
   name = '';
 
   constructor(
@@ -21,7 +22,7 @@ export class PetsListComponent {
   ) {}
 
   ngOnInit(): void {
-    this.retrievePetsOfOwner(this.route.snapshot.params['ownerId'])
+    this.retrievePetsOfOwner(this.currentOwnerId)
   }
 
   retrievePetsOfOwner(ownerId: string): void {
@@ -35,7 +36,7 @@ export class PetsListComponent {
   }
 
   refreshList(): void {
-    this.retrievePetsOfOwner(this.route.snapshot.params['ownerId']);
+    this.retrievePetsOfOwner(this.currentOwnerId);
     this.currentPet = {};
     this.currentIndex = -1;
   }
@@ -46,7 +47,7 @@ export class PetsListComponent {
   }
 
   removeAllPetsOfOwner(): void {
-    this.petService.deleteAllOfOwner(this.route.snapshot.params['ownerId']).subscribe({
+    this.petService.deleteAllOfOwner(this.currentOwnerId).subscribe({
       next: (res) => {
         console.log(res);
         this.refreshList();
