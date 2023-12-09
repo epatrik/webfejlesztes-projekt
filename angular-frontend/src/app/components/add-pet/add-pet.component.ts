@@ -15,6 +15,7 @@ export class AddPetComponent {
   };
   submitted = false;
   ownerId = this.route.snapshot.params['ownerId'];
+  ownerNotFound = false;
 
   constructor(
     private petService: PetService,
@@ -31,8 +32,17 @@ export class AddPetComponent {
       next: (res) => {
         console.log(res);
         this.submitted = true;
+        this.ownerNotFound = false;
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        if (e.status == 404) {
+          this.ownerNotFound = true;
+          console.log("Not found");
+        }
+        else {
+          console.error(e)
+        }
+      }
     });
   }
 

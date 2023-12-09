@@ -2,7 +2,6 @@ import {Component, Input} from '@angular/core';
 import { Pet } from 'src/app/models/pet.model';
 import { PetService } from 'src/app/services/pet.service';
 import {ActivatedRoute, Router} from "@angular/router";
-import {OwnerService} from "../../services/owner.service";
 
 @Component({
   selector: 'app-pets-list',
@@ -14,6 +13,7 @@ export class PetsListComponent {
   currentPet: Pet = {};
   currentIndex = -1;
   currentOwnerId = this.route.snapshot.params['ownerId'];
+  ownerNotFound: boolean = false;
   name = '';
 
   constructor(
@@ -29,9 +29,18 @@ export class PetsListComponent {
     this.petService.getAllOfOwner(ownerId).subscribe({
       next: (data) => {
         this.pets = data;
+        this.ownerNotFound = false;
         console.log(data);
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        if (e.status == 404) {
+          this.ownerNotFound = true;
+          console.log("Not found");
+        }
+        else {
+          console.error(e)
+        }
+      }
     });
   }
 

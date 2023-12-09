@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!ownerNotFound">
   <div class="submit-form">
     <div *ngIf="!submitted">
       <h4>Add Pet</h4>
@@ -36,4 +36,5 @@
     </div>
   </div>
 </div>
+<h1 *ngIf="ownerNotFound">Owner Not Found</h1>
 

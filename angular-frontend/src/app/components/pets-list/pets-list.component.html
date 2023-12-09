@@ -1,4 +1,4 @@
-<div class="list row">
+<div *ngIf="!ownerNotFound" class="list row">
   <div class="col-md-6">
     <h4>Pets Of Owner</h4>
     <div *ngIf="pets?.length==0">This owner doesn't have any pets registered.</div>
@@ -26,4 +26,5 @@
     ></app-pet-details>
   </div>
 </div>
+<h1 *ngIf="ownerNotFound">Owner Not Found</h1>
 
