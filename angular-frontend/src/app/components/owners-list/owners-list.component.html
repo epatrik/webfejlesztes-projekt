@@ -20,6 +20,7 @@
   </div>
   <div class="col-md-6">
     <h4>Owners List</h4>
+    <div *ngIf="owners == undefined">No owners registered</div>
     <ul class="list-group">
       <li
         class="list-group-item"
@@ -31,7 +32,7 @@
       </li>
     </ul>
 
-    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllOwners()">
+    <button *ngIf="owners != undefined" class="m-3 btn btn-sm btn-danger" (click)="removeAllOwners()">
       Remove All
     </button>
     <button class="m-3 btn btn-sm btn-success" routerLink="/add">

@@ -1,6 +1,7 @@
 <div class="list row">
   <div class="col-md-6">
     <h4>Pets Of Owner</h4>
+    <div *ngIf="pets?.length==0">This owner doesn't have any pets registered.</div>
     <ul class="list-group">
       <li
         class="list-group-item"
@@ -12,7 +13,7 @@
       </li>
     </ul>
 
-    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllPetsOfOwner()">
+    <button *ngIf="pets?.length!=0" class="m-3 btn btn-sm btn-danger" (click)="removeAllPetsOfOwner()">
       Remove All
     </button>
     <button class="m-3 btn btn-sm btn-success" routerLink="/addPet/{{currentOwnerId}}">Add Pet</button>
