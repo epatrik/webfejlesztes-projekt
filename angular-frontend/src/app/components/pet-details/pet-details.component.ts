@@ -2,8 +2,6 @@ import {Component, Input} from '@angular/core';
 import {PetService} from "../../services/pet.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Pet} from "../../models/pet.model";
-import {OwnerService} from "../../services/owner.service";
-import {Owner} from "../../models/owner.model";
 
 @Component({
   selector: 'app-pet-details',
@@ -18,18 +16,11 @@ export class PetDetailsComponent {
     species: ''
   };
 
-  @Input() currentOwner: Owner = {
-    name: '',
-    email: '',
-    phoneNumber: ''
-  };
-
   message = '';
   currentOwnerId: string | undefined;
 
   constructor(
     private petService: PetService,
-    private ownerService: OwnerService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -38,7 +29,6 @@ export class PetDetailsComponent {
     if (!this.viewMode) {
       this.message = '';
       this.getOwnerId(this.route.snapshot.params['id'])
-      this.getOwner(this.currentOwnerId)
       this.getPet(this.route.snapshot.params['id']);
     }
   }
@@ -47,16 +37,6 @@ export class PetDetailsComponent {
     this.petService.get(id).subscribe({
       next: (data) => {
         this.currentPet = data;
-        console.log(data);
-      },
-      error: (e) => console.error(e)
-    });
-  }
-
-  getOwner(ownerId: string | undefined): void {
-    this.ownerService.get(ownerId).subscribe({
-      next: (data) => {
-        this.currentOwner = data;
         console.log(data);
       },
       error: (e) => console.error(e)
