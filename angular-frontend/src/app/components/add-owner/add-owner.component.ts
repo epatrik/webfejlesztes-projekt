@@ -14,23 +14,31 @@ export class AddOwnerComponent {
     phoneNumber: ''
   };
   submitted = false;
+  valid = true;
 
   constructor(private ownerService: OwnerService) {}
 
   saveOwner(): void {
-    const data = {
-      name: this.owner.name,
-      email: this.owner.email,
-      phoneNumber : this.owner.phoneNumber
-    };
+    if (this.owner.email && this.isValidEmail(this.owner.email)
+      && this.owner.phoneNumber && this.isValidPhoneNumber(this.owner.phoneNumber) && this.owner.name) {
+      const data = {
+        name: this.owner.name,
+        email: this.owner.email,
+        phoneNumber: this.owner.phoneNumber
+      };
 
-    this.ownerService.create(data).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.submitted = true;
-      },
-      error: (e) => console.error(e)
-    });
+      this.ownerService.create(data).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.valid = true;
+          this.submitted = true;
+        },
+        error: (e) => console.error(e)
+      });
+    }
+    else {
+      this.valid = false
+    }
   }
 
   newOwner(): void {
@@ -40,5 +48,15 @@ export class AddOwnerComponent {
       email: '',
       phoneNumber: ''
     };
+  }
+
+  isValidEmail(email: string): boolean {
+    const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+    return emailPattern.test(email);
+  }
+
+  isValidPhoneNumber(phoneNumber: string): boolean {
+    const phoneNumberPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    return phoneNumberPattern.test(phoneNumber);
   }
 }
